@@ -4,9 +4,9 @@ import { PoemResponse } from "../types";
 
 const API_ENDPOINT = "/random";
 const POEM_ENDPOINT = "/random";
-const router = express.Router();
+const router = express.Router({ strict: true });
 
-router.get(`${API_ENDPOINT}/:numRandom`, async (request, response) => {
+router.get(`${API_ENDPOINT}/:numRandom/`, async (request, response) => {
   const randomPoems = await axiosInstance.get<PoemResponse[]>(
     `${POEM_ENDPOINT}/${request.params.numRandom}`
   );
