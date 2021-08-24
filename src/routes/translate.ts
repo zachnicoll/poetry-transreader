@@ -1,6 +1,6 @@
 import { Translate } from "@google-cloud/translate/build/src/v2";
 import express from "express";
-import { TranslateBody, Request } from "../types";
+import { TranslateBody, Request, SupportedLanguage } from "../types";
 import config from "../utils/config";
 
 const API_ENDPOINT = "/translate";
@@ -8,7 +8,7 @@ const router = express.Router({ strict: true });
 const translate = new Translate({ projectId: config.PROJECT_ID });
 
 // Use this local variable as a 'cache' so we don't spam the API for the same information
-let supportedLanguages: { code: string; name: string }[] | null = null;
+let supportedLanguages: SupportedLanguage[] | null = null;
 
 router.get(`${API_ENDPOINT}/`, async (request, response) => {
   // Use 'cache' if this request has been made before

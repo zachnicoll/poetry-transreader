@@ -16,3 +16,8 @@ export interface TranslateBody {
 export interface SpeakBody {
   text: string;
 }
+
+export interface SupportedLanguage {
+  code: string;
+  name: string;
+}
