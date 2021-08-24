@@ -15,9 +15,14 @@ router.get(`${API_ENDPOINT}/`, async (request, response) => {
   if (supportedLanguages) {
     response.json(supportedLanguages);
   } else {
-    const [languages] = await translate.getLanguages();
-    supportedLanguages = languages;
-    response.json(languages);
+    try {
+      const [languages] = await translate.getLanguages();
+      supportedLanguages = languages;
+      response.json(languages);
+    } catch (error) {
+      response.status(500);
+      response.json({ error: error.message });
+    }
   }
 });
 
@@ -27,8 +32,13 @@ router.post(
     const text = request.body.text;
     const targetLang = request.body.targetLang;
 
-    const [translation] = await translate.translate(text, targetLang);
-    response.json(translation);
+    try {
+      const [translation] = await translate.translate(text, targetLang);
+      response.json(translation);
+    } catch (error) {
+      response.status(500);
+      response.json({ error: error.message });
+    }
   }
 );
 

@@ -1,5 +1,5 @@
 import express from "express";
-import axiosInstance from "../utils/axiosInstance";
+import axiosInstance, { handleAxiosError } from "../utils/axiosInstance";
 import { PoemResponse } from "../types";
 
 const API_ENDPOINT = "/author";
@@ -7,11 +7,15 @@ const POEM_ENDPOINT = "/author";
 const router = express.Router({ strict: true });
 
 router.get(`${API_ENDPOINT}/:searchTerm/`, async (request, response) => {
-  const poemsByAuthor = await axiosInstance.get<PoemResponse[]>(
-    `${POEM_ENDPOINT}/${request.params.searchTerm}`
-  );
+  try {
+    const poemsByAuthor = await axiosInstance.get<PoemResponse[]>(
+      `${POEM_ENDPOINT}/${request.params.searchTerm}`
+    );
 
-  response.json(poemsByAuthor.data);
+    response.json(poemsByAuthor.data);
+  } catch (error) {
+    handleAxiosError(error, response);
+  }
 });
 
 export default router;

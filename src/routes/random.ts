@@ -1,5 +1,5 @@
 import express from "express";
-import axiosInstance from "../utils/axiosInstance";
+import axiosInstance, { handleAxiosError } from "../utils/axiosInstance";
 import { PoemResponse } from "../types";
 
 const API_ENDPOINT = "/random";
@@ -7,11 +7,15 @@ const POEM_ENDPOINT = "/random";
 const router = express.Router({ strict: true });
 
 router.get(`${API_ENDPOINT}/:numRandom/`, async (request, response) => {
-  const randomPoems = await axiosInstance.get<PoemResponse[]>(
-    `${POEM_ENDPOINT}/${request.params.numRandom}`
-  );
+  try {
+    const randomPoems = await axiosInstance.get<PoemResponse[]>(
+      `${POEM_ENDPOINT}/${request.params.numRandom}`
+    );
 
-  response.json(randomPoems.data);
+    response.json(randomPoems.data);
+  } catch (error) {
+    handleAxiosError(error, response);
+  }
 });
 
 export default router;
