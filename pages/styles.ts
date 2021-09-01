@@ -72,3 +72,8 @@ export const Fade = styled.div`
     rgba(232, 220, 184, 1) 100%
   );
 `;
+
+export const Line = styled.hr`
+  width: 100%;
+  border: solid 1px ${colours.darkBlue};
+`;

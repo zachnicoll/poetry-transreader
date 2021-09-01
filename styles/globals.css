@@ -15,3 +15,11 @@ body {
   font-family: Courier Prime;
   color: #040720;
 }
+
+h1 {
+  margin: 0.5rem;
+}
+
+h3 {
+  margin: 0.25rem;
+}

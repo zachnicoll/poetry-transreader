@@ -37,6 +37,9 @@ const Home: NextPage = () => {
             // Alternate widths to create a 'mosaic' pattern
             <Card width={i % 4 === 0 || i % 4 === 3 ? 45 : 54} key={poem.title}>
               <h1>{poem.title}</h1>
+              <h3>{poem.author}</h3>
+
+              <styles.Line />
               <styles.ScrollBox>
                 {poem.lines.map((line, i) => (
                   <p key={i}>{line}</p>
