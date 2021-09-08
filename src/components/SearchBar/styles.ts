@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { KeyboardReturn } from "@material-ui/icons";
+import breakpoints from "Styles/breakpoints";
 import { colours } from "Styles/colours";
 import { ButtonContainer } from "Styles/containers";
 
@@ -7,10 +7,18 @@ export const Container = styled.div`
   width: 100%;
   border-radius: 100em;
   background-color: ${colours.paper};
-  height: 4em;
   display: flex;
   align-items: center;
-  padding: 1em;
+
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+
+  ${breakpoints.mobile(`
+      flex-direction: column;
+      justify-content: space-between;
+    `)}
 `;
 
 export const Input = styled.input`
@@ -45,4 +53,19 @@ export const Button = styled.button<{ selected: boolean }>`
     background: ${colours.darkPaper};
     color: ${colours.darkBlue};
   }
+`;
+
+export const TitleAuthorContainer = styled.div`
+  display: flex;
+`;
+
+export const InputReturnContainer = styled.div`
+  display: flex;
+  flex: 1;
+
+  ${breakpoints.mobile(`
+    flex: 0; 
+    width: 90%; 
+    margin-top: 0.5em;
+  `)}
 `;

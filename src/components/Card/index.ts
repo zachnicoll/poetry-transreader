@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
+import breakpoints from "Styles/breakpoints";
 import { colours } from "../../styles/colours";
 
 export const Card = styled.div<{ width: number }>`
   position: relative;
   display: flex;
   flex-direction: column;
+
   width: ${({ width }) => width}%;
+  ${breakpoints.mobile("width: 100%;")}
+
   background-color: ${colours.paper};
   padding: 0.5em 1em;
   border-radius: 1em;

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import breakpoints from "Styles/breakpoints";
 import { colours } from "Styles/colours";
 import { Row } from "Styles/containers";
 
@@ -10,4 +11,6 @@ export const Heading = styled.h1`
 
 export const HeaderRow = styled(Row)`
   margin-bottom: 1em;
+
+  ${breakpoints.mobile("flex-direction: column;")}
 `;

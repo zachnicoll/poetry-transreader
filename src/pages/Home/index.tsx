@@ -28,8 +28,8 @@ const Home: NextPage = () => {
       </Head>
 
       <styles.HeaderRow>
-        <SearchBar onSearch={handleSearch} />
         <styles.Heading>Poetry TransReader</styles.Heading>
+        <SearchBar onSearch={handleSearch} />
       </styles.HeaderRow>
 
       {loading || randomLoading ? (

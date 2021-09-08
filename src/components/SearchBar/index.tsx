@@ -28,28 +28,32 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   return (
     <styles.Container>
-      <styles.Button
-        onClick={() => handleClick("title")}
-        selected={selected === "title"}
-      >
-        Title
-      </styles.Button>
-      <styles.Button
-        onClick={() => handleClick("author")}
-        selected={selected === "author"}
-      >
-        Author
-      </styles.Button>
+      <styles.TitleAuthorContainer>
+        <styles.Button
+          onClick={() => handleClick("title")}
+          selected={selected === "title"}
+        >
+          Title
+        </styles.Button>
+        <styles.Button
+          onClick={() => handleClick("author")}
+          selected={selected === "author"}
+        >
+          Author
+        </styles.Button>
+      </styles.TitleAuthorContainer>
 
-      <styles.Input
-        placeholder={`Search for poems by ${selected}...`}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyPress={handleKeyPress}
-      />
+      <styles.InputReturnContainer>
+        <styles.Input
+          placeholder={`Search for poems by ${selected}...`}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
 
-      <styles.IconButton onClick={handleSubmit}>
-        <KeyboardReturn fontSize="large" />
-      </styles.IconButton>
+        <styles.IconButton onClick={handleSubmit}>
+          <KeyboardReturn fontSize="large" />
+        </styles.IconButton>
+      </styles.InputReturnContainer>
     </styles.Container>
   );
 };
