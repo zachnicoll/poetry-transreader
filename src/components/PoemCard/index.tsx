@@ -2,6 +2,9 @@ import React from "react";
 import { PoemResponse } from "API/types";
 import { Card } from "../Card";
 import * as styles from "./styles";
+import { Row } from "Styles/containers";
+import { colours } from "Styles/colours";
+import { Translate, VolumeUp, VolumeUpOutlined } from "@material-ui/icons";
 
 interface PoemCardProps {
   poem: PoemResponse;
@@ -20,7 +23,18 @@ const PoemCard: React.FC<PoemCardProps> = ({ poem, index }) => {
       key={poem.title}
     >
       <h1>{poem.title}</h1>
-      <h3>{poem.author}</h3>
+      <Row>
+        <h3>{poem.author}</h3>
+        <styles.IconContainer>
+          <styles.IconButton>
+            <Translate />
+          </styles.IconButton>
+
+          <styles.IconButton>
+            <VolumeUpOutlined />
+          </styles.IconButton>
+        </styles.IconContainer>
+      </Row>
 
       <styles.Line />
       <styles.ScrollBox>

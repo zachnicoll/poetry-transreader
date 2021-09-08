@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { colours } from "Styles/colours";
+import { ButtonContainer } from "Styles/containers";
 
 export const ScrollBox = styled.div`
   position: relative;
@@ -42,4 +43,15 @@ export const Fade = styled.div`
 export const Line = styled.hr`
   width: 100%;
   border: solid 1px ${colours.darkBlue};
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+export const IconButton = styled(ButtonContainer)`
+  margin-right: 0.25em;
 `;

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { colours } from "../../styles/colours";
+import { KeyboardReturn } from "@material-ui/icons";
+import { colours } from "Styles/colours";
+import { ButtonContainer } from "Styles/containers";
 
 export const Container = styled.div`
   width: 100%;
@@ -26,13 +27,8 @@ export const Input = styled.input`
   }
 `;
 
-export const Icon = styled(FontAwesomeIcon)`
-  display: block;
+export const IconButton = styled(ButtonContainer)`
   margin-left: 0.5em;
-
-  &:hover {
-    background: ${colours.darkPaper};
-  }
 `;
 
 export const Button = styled.button<{ selected: boolean }>`

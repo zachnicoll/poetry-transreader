@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import * as styles from "./styles";
 import { SearchType } from "../../api/types";
-import { faSearch, faShare } from "@fortawesome/free-solid-svg-icons";
 import { colours } from "../../styles/colours";
+import { KeyboardReturn } from "@material-ui/icons";
 
 interface SearchBarProps {
   onSearch: (type: SearchType, searchTerm: string) => void;
@@ -47,12 +47,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         onKeyPress={handleKeyPress}
       />
 
-      <styles.Icon
-        icon={faShare}
-        color={colours.darkBlue}
-        size="2x"
-        onClick={handleSubmit}
-      />
+      <styles.IconButton onClick={handleSubmit}>
+        <KeyboardReturn fontSize="large" />
+      </styles.IconButton>
     </styles.Container>
   );
 };
