@@ -15,4 +15,5 @@ export interface TranslateBody {
 
 export interface SpeakBody {
   text: string;
+  languageCode: string;
 }

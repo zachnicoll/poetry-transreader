@@ -12,9 +12,14 @@ router.post(
     try {
       const [speech] = await client.synthesizeSpeech({
         input: { text: request.body.text },
-        // Select the language and SSML voice gender (optional)
-        voice: { languageCode: "en-US", ssmlGender: "NEUTRAL" },
-        // select the type of audio encoding
+
+        // Select the language and SSML voice gender
+        voice: {
+          languageCode: request.body.languageCode,
+          ssmlGender: "NEUTRAL",
+        },
+
+        // Select the type of audio encoding
         audioConfig: { audioEncoding: "MP3" },
       });
 
