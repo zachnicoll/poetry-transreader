@@ -8,3 +8,8 @@ export interface PoemResponse {
 export type SearchType = "title" | "author";
 
 export type TranslateResponse = string;
+
+export interface LanguageResult {
+  code: string;
+  name: string;
+}
