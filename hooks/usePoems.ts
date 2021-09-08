@@ -16,8 +16,8 @@ export const usePoems = (type: SearchType, searchTerm: string): HookReturn => {
       setLoading(true);
 
       try {
-        const poems = await API.poems.searchBy(type, searchTerm);
-        setPoems(poems);
+        const _poems = await API.poems.searchBy(type, searchTerm);
+        setPoems(_poems);
       } catch (e) {
         console.error(e);
         alert("Could not find any poems matching that search term.");
