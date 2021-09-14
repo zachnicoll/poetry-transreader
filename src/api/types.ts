@@ -5,7 +5,10 @@ export interface PoemResponse {
   linecount: number;
 }
 
-export type SearchType = "title" | "author";
+export enum SearchType {
+  TITLE = "title",
+  AUTHOR = "author"
+}
 
 export type TranslateResponse = string;
 

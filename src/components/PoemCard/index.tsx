@@ -9,6 +9,7 @@ import useTextToSpeech from "Hooks/useTextToSpeech";
 interface PoemCardProps {
   poem: PoemResponse;
   index: number;
+  onPlay: (audioBuffer: ArrayBuffer) => void;
 }
 
 const SMALL_WIDTH = 45;
@@ -16,35 +17,12 @@ const GAP = 1;
 const BIG_WIDTH = 100 - SMALL_WIDTH - GAP;
 
 
-const PoemCard: React.FC<PoemCardProps> = ({ poem, index }) => {
-  let audioContext = new AudioContext();
-
+const PoemCard: React.FC<PoemCardProps> = ({ poem, index, onPlay }) => {
   const { audioBuffer, convertToAudio, loading } = useTextToSpeech();
 
-  const processAudio = async (arrBuff: ArrayBuffer): Promise<void> => {
-    // TODO: Move all audio playing to parent so that only 1 audio file plays at a time.
-    
-    audioContext.close();
-    audioContext = new AudioContext();
-    
-    try {
-      const decodedBuffer = await audioContext.decodeAudioData(arrBuff);
-
-      const newSrc = audioContext.createBufferSource();
-      newSrc.buffer = decodedBuffer;
-      newSrc.connect(audioContext.destination);
-
-      // Play the audio
-      newSrc.start(0);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   useEffect(() => {
-    if (audioBuffer)
-    {
-      processAudio(audioBuffer)
+    if (audioBuffer) {
+      onPlay(audioBuffer);
     }
   }, [audioBuffer]);
 

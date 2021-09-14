@@ -1,4 +1,4 @@
-import { axiosInstance } from "./config";
+import { axiosInstance } from "./apiConfig";
 import { LanguageResult, TranslateResponse } from "./types";
 
 const TRANSLATE_ENDPOINT = "/translate";

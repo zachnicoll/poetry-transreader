@@ -8,7 +8,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const [selected, setSelected] = useState<SearchType>("title");
+  const [selected, setSelected] = useState<SearchType>(SearchType.TITLE);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleClick = (clicked: SearchType): void => {
@@ -29,14 +29,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     <styles.Container>
       <styles.TitleAuthorContainer>
         <styles.Button
-          onClick={() => handleClick("title")}
-          selected={selected === "title"}
+          onClick={() => handleClick(SearchType.TITLE)}
+          selected={selected === SearchType.TITLE}
         >
           Title
         </styles.Button>
         <styles.Button
-          onClick={() => handleClick("author")}
-          selected={selected === "author"}
+          onClick={() => handleClick(SearchType.AUTHOR)}
+          selected={selected === SearchType.AUTHOR}
         >
           Author
         </styles.Button>

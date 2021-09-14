@@ -1,4 +1,4 @@
-import { axiosInstance } from "./config";
+import { axiosInstance } from "./apiConfig";
 import { PoemResponse, SearchType } from "./types";
 
 const TITLE_ENDPOINT = "/title";
