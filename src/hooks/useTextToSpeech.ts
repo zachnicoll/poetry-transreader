@@ -4,13 +4,13 @@ import { useState } from "react";
 type TAudio = HTMLAudioElement;
 
 interface HookReturn {
-  audioSrc: Blob | null;
+  audioBuffer: ArrayBuffer | null;
   convertToAudio: (text: string, languageCode?: string) => Promise<void>;
   loading: boolean;
 }
 
 const useTextToSpeech = (): HookReturn => {
-  const [audioSrc, setAudioSrc] = useState<Blob | null>(null);
+  const [audioBuffer, setAudioBuffer] = useState<ArrayBuffer | null>(null);
   const [loading, setLoading] = useState(false);
 
   const convertToAudio = async (
@@ -20,11 +20,9 @@ const useTextToSpeech = (): HookReturn => {
     setLoading(true);
 
     try {
-      const audioBlob = await API.google.textToSpeech(text, languageCode);
+      const audio = await API.google.textToSpeech(text, languageCode);
 
-      // TODO: Make this work!
-
-      setAudioSrc(audioBlob);
+      setAudioBuffer(audio);
     } catch (error) {
       console.error(error);
       alert("Failed to convert that poem to audio :(");
@@ -34,7 +32,7 @@ const useTextToSpeech = (): HookReturn => {
   };
 
   return {
-    audioSrc,
+    audioBuffer,
     convertToAudio,
     loading,
   };

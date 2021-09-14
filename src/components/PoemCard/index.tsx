@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { PoemResponse } from "API/types";
 import { Card } from "../Card";
 import * as styles from "./styles";
@@ -15,28 +15,38 @@ const SMALL_WIDTH = 45;
 const GAP = 1;
 const BIG_WIDTH = 100 - SMALL_WIDTH - GAP;
 
+
 const PoemCard: React.FC<PoemCardProps> = ({ poem, index }) => {
-  const { audioSrc, convertToAudio, loading } = useTextToSpeech();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  let audioContext = new AudioContext();
 
-  const [b64, setB64] = useState("");
+  const { audioBuffer, convertToAudio, loading } = useTextToSpeech();
 
-  useEffect(() => {
-    console.log(b64);
-  }, [b64]);
+  const processAudio = async (arrBuff: ArrayBuffer): Promise<void> => {
+    // TODO: Move all audio playing to parent so that only 1 audio file plays at a time.
+    
+    audioContext.close();
+    audioContext = new AudioContext();
+    
+    try {
+      const decodedBuffer = await audioContext.decodeAudioData(arrBuff);
 
-  useEffect(() => {
-    if (audioSrc) {
-      const fileReader = new FileReader();
+      const newSrc = audioContext.createBufferSource();
+      newSrc.buffer = decodedBuffer;
+      newSrc.connect(audioContext.destination);
 
-      fileReader.onload = (e) => setB64(e.target?.result);
-      fileReader.readAsDataURL(audioSrc);
-
-      // const audio = new Audio(audioSrc);
-
-      // audio.play();
+      // Play the audio
+      newSrc.start(0);
+    } catch (e) {
+      console.error(e);
     }
-  }, [audioSrc]);
+  }
+
+  useEffect(() => {
+    if (audioBuffer)
+    {
+      processAudio(audioBuffer)
+    }
+  }, [audioBuffer]);
 
   const handleTextToSpeech = async (): Promise<void> => {
     const poemLines = poem.lines.join("\n");
@@ -70,12 +80,6 @@ const PoemCard: React.FC<PoemCardProps> = ({ poem, index }) => {
         ))}
       </styles.ScrollBox>
       <styles.Fade />
-
-      {/* {audioSrc && <audio ref={audioRef} src={audioSrc} preload="auto" controls/>} */}
-
-      <a href={b64} download="tranlsate.mp3">
-        Download mee
-      </a>
     </Card>
   );
 };
