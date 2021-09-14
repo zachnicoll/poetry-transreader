@@ -6,7 +6,7 @@ import routes from "./routes";
 import config from "./utils/config";
 
 const app = express();
-const logger = morgan("short");
+const logger = morgan("combined");
 
 const corsOptions = {
   optionsSuccessStatus: 200,
