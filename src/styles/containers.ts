@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colours } from "./colours";
+import colours from "./colours";
 
 export const Container = styled.div`
   min-height: 100vh;

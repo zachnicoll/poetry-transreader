@@ -1,34 +1,43 @@
 import React, { useEffect } from "react";
 import { PoemResponse } from "API/types";
-import { Card } from "../Card";
-import * as styles from "./styles";
 import { Row } from "Styles/containers";
 import { Refresh, Translate, VolumeUpOutlined } from "@material-ui/icons";
 import useTextToSpeech from "Hooks/useTextToSpeech";
+import * as styles from "./styles";
+import Card from "../Card";
 
 interface PoemCardProps {
   poem: PoemResponse;
   index: number;
   onPlay: (audioBuffer: ArrayBuffer) => void;
+  onTranslate: (poem: PoemResponse) => void;
 }
 
 const SMALL_WIDTH = 45;
 const GAP = 1;
 const BIG_WIDTH = 100 - SMALL_WIDTH - GAP;
 
-
-const PoemCard: React.FC<PoemCardProps> = ({ poem, index, onPlay }) => {
+const PoemCard: React.FC<PoemCardProps> = ({
+  poem,
+  index,
+  onPlay,
+  onTranslate
+}) => {
   const { audioBuffer, convertToAudio, loading } = useTextToSpeech();
 
   useEffect(() => {
     if (audioBuffer) {
       onPlay(audioBuffer);
     }
-  }, [audioBuffer, onPlay]);
+  }, [audioBuffer]);
 
   const handleTextToSpeech = async (): Promise<void> => {
     const poemLines = poem.lines.join("\n");
     await convertToAudio(poemLines);
+  };
+
+  const handleTranslate = (): void => {
+    onTranslate(poem);
   };
 
   return (
@@ -41,7 +50,7 @@ const PoemCard: React.FC<PoemCardProps> = ({ poem, index, onPlay }) => {
       <Row>
         <h3>{poem.author}</h3>
         <styles.IconContainer>
-          <styles.IconButton>
+          <styles.IconButton onClick={handleTranslate}>
             <Translate />
           </styles.IconButton>
 
@@ -53,8 +62,8 @@ const PoemCard: React.FC<PoemCardProps> = ({ poem, index, onPlay }) => {
 
       <styles.Line />
       <styles.ScrollBox>
-        {poem.lines.map((line, i) => (
-          <p key={i}>{line}</p>
+        {poem.lines.map((line) => (
+          <p key={line}>{line}</p>
         ))}
       </styles.ScrollBox>
       <styles.Fade />

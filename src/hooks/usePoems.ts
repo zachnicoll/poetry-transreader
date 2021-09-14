@@ -7,7 +7,7 @@ interface HookReturn {
   poems: PoemResponse[];
 }
 
-export const usePoems = (type: SearchType, searchTerm: string): HookReturn => {
+const usePoems = (type: SearchType, searchTerm: string): HookReturn => {
   const [loading, setLoading] = useState(false);
   const [poems, setPoems] = useState<PoemResponse[]>([]);
 
@@ -16,8 +16,8 @@ export const usePoems = (type: SearchType, searchTerm: string): HookReturn => {
       setLoading(true);
 
       try {
-        const _poems = await API.poems.searchBy(type, searchTerm);
-        setPoems(_poems);
+        const poemResults = await API.poems.searchBy(type, searchTerm);
+        setPoems(poemResults);
       } catch (e) {
         console.error(e);
         alert("Could not find any poems matching that search term.");
@@ -33,3 +33,5 @@ export const usePoems = (type: SearchType, searchTerm: string): HookReturn => {
 
   return { loading, poems };
 };
+
+export default usePoems;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import breakpoints from "Styles/breakpoints";
-import { colours } from "Styles/colours";
+import colours from "Styles/colours";
 import { ButtonContainer } from "Styles/containers";
 
 export const Container = styled.div`
@@ -39,7 +39,11 @@ export const IconButton = styled(ButtonContainer)`
   margin-left: 0.5em;
 `;
 
-export const Button = styled.button<{ selected: boolean }>`
+interface ButtonProps {
+  selected: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
   background: ${({ selected }) => (selected ? colours.darkBlue : "none")};
   color: ${({ selected }) => (selected ? colours.paper : colours.darkBlue)};
   border: none;

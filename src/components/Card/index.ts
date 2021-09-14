@@ -1,8 +1,12 @@
 import styled from "@emotion/styled";
 import breakpoints from "Styles/breakpoints";
-import { colours } from "../../styles/colours";
+import colours from "../../styles/colours";
 
-export const Card = styled.div<{ width: number }>`
+interface CardProps {
+  width: number;
+}
+
+const Card = styled.div<CardProps>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -17,3 +21,5 @@ export const Card = styled.div<{ width: number }>`
   margin-bottom: 1em;
   height: 500px;
 `;
+
+export default Card;
