@@ -24,7 +24,7 @@ const PoemCard: React.FC<PoemCardProps> = ({ poem, index, onPlay }) => {
     if (audioBuffer) {
       onPlay(audioBuffer);
     }
-  }, [audioBuffer]);
+  }, [audioBuffer, onPlay]);
 
   const handleTextToSpeech = async (): Promise<void> => {
     const poemLines = poem.lines.join("\n");

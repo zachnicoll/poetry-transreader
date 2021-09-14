@@ -1,5 +1,5 @@
 const breakpoints = {
-  mobile: (css: string) => `@media (max-width: 800px) {
+  mobile: (css: string): string => `@media (max-width: 800px) {
     ${css}
   }`,
 };

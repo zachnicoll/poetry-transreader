@@ -1,8 +1,6 @@
 import { API } from "API";
 import { useState } from "react";
 
-type TAudio = HTMLAudioElement;
-
 interface HookReturn {
   audioBuffer: ArrayBuffer | null;
   convertToAudio: (text: string, languageCode?: string) => Promise<void>;
@@ -15,7 +13,7 @@ const useTextToSpeech = (): HookReturn => {
 
   const convertToAudio = async (
     text: string,
-    languageCode: string = "en-US"
+    languageCode = "en-US"
   ): Promise<void> => {
     setLoading(true);
 
