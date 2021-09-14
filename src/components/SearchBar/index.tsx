@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import * as styles from "./styles";
-import { SearchType } from "../../api/types";
-import { colours } from "../../styles/colours";
+import { SearchType } from "API/types";
 import { KeyboardReturn } from "@material-ui/icons";
 
 interface SearchBarProps {

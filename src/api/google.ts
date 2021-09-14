@@ -29,24 +29,20 @@ export const supportedLanguages = async (): Promise<LanguageResult[]> => {
 export const textToSpeech = async (
   text: string,
   languageCode: string
-): Promise<string> => {
-  const audio = await axiosInstance.post<ArrayBuffer>(
-    `${SPEAK_ENDPOINT}/`,
-    {
-      text,
-      languageCode,
-    },
-    {
-      responseType: "arraybuffer",
-      headers: {
-        "Content-Type": "audio/mp3",
-      },
-    }
-  );
+): Promise<Blob> => {
+  const audio = await axiosInstance.post<ArrayBuffer>(`${SPEAK_ENDPOINT}/`, {
+    text,
+    languageCode,
+  });
 
   // Convert array buffer to MP3 Blob
   const blob = new Blob([audio.data], { type: "audio/mp3" });
+  return blob;
 
-  // Create a local URL that can be used to play the audio
-  return URL.createObjectURL(blob);
+  // TODO: MAke this work!!
+
+  // console.log("BLOB: ", blob);
+
+  // // Create a local URL that can be used to play the audio
+  // return URL.createObjectURL(blob);
 };
