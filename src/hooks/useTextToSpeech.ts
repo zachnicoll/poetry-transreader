@@ -1,5 +1,5 @@
-import { API } from "API";
-import { useState } from "react";
+import { API } from 'API';
+import { useState } from 'react';
 
 interface HookReturn {
   audioBuffer: ArrayBuffer | null;
@@ -13,7 +13,7 @@ const useTextToSpeech = (): HookReturn => {
 
   const convertToAudio = async (
     text: string,
-    languageCode = "en-US"
+    languageCode = 'en-US'
   ): Promise<void> => {
     setLoading(true);
 
@@ -23,7 +23,7 @@ const useTextToSpeech = (): HookReturn => {
       setAudioBuffer(audio);
     } catch (error) {
       console.error(error);
-      alert("Failed to convert that poem to audio :(");
+      alert('Failed to convert that poem to audio :(');
     }
 
     setLoading(false);
@@ -32,7 +32,7 @@ const useTextToSpeech = (): HookReturn => {
   return {
     audioBuffer,
     convertToAudio,
-    loading,
+    loading
   };
 };
 

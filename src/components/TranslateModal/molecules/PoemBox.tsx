@@ -1,15 +1,15 @@
 import { PoemResponse } from 'API/types';
 import useTextToSpeech from 'Hooks/useTextToSpeech';
 import React, { useEffect } from 'react';
-import { ButtonContainer } from 'Styles/containers';
 import * as styles from '../styles';
 
 interface PoemBoxProps {
-  poem: PoemResponse;
+  poem: PoemResponse | null;
+  language?: string;
   onPlay: (audioBuffer: ArrayBuffer) => void;
 }
 
-const PoemBox: React.FC<PoemBoxProps> = ({ poem, onPlay }) => {
+const PoemBox: React.FC<PoemBoxProps> = ({ poem, language, onPlay }) => {
   const { audioBuffer, convertToAudio, loading } = useTextToSpeech();
 
   useEffect(() => {
@@ -22,21 +22,25 @@ const PoemBox: React.FC<PoemBoxProps> = ({ poem, onPlay }) => {
     selectedPoem: PoemResponse
   ): Promise<void> => {
     const poemLines = selectedPoem.lines.join('\n');
-    await convertToAudio(poemLines);
+    await convertToAudio(poemLines, language);
   };
 
   return (
     <styles.PoemBoxContainer>
       <styles.PoemContainer>
         <styles.ScrollBox>
-          {poem.lines.map((line, i) => (
-            <p key={i}>{line}</p>
-          ))}
+          {poem ? (
+            poem.lines.map((line, i) => <p key={i}>{line}</p>)
+          ) : (
+            <p>Select a language to translate the poem to...</p>
+          )}
         </styles.ScrollBox>
 
-        <styles.SpeakContainer onClick={() => handleTextToSpeech(poem)}>
-          {loading ? <styles.Loading /> : <styles.Speak />}
-        </styles.SpeakContainer>
+        {poem && (
+          <styles.SpeakContainer onClick={() => handleTextToSpeech(poem)}>
+            {loading ? <styles.Loading /> : <styles.Speak />}
+          </styles.SpeakContainer>
+        )}
       </styles.PoemContainer>
     </styles.PoemBoxContainer>
   );

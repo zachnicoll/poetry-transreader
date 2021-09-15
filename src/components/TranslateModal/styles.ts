@@ -16,6 +16,7 @@ export const PoemBoxContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
+  flex: 1;
 `;
 
 export const PoemContainer = styled.div`
@@ -25,6 +26,7 @@ export const PoemContainer = styled.div`
   border-radius: 1em;
   padding: 0.5em 1em;
   height: 90%;
+  justify-content: space-between;
 `;
 
 export const ScrollBox = styled.div`
@@ -73,7 +75,7 @@ export const SpeakContainer = styled(ButtonContainer)`
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 `;
 
