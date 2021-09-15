@@ -17,3 +17,5 @@ export interface SpeakBody {
   text: string;
   languageCode: string;
 }
+
+export type VoiceList = string[] | null;

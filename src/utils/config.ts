@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import fs from "fs";
 
 interface Config {
   PORT: string;
@@ -6,7 +7,9 @@ interface Config {
   PROJECT_ID: string;
 }
 
-if (dotenv.config().error)
-  throw new Error("FAILED TO PASS PROJECT CONFIG, IS THE .env FILE CORRECT?");
+const envConfig = dotenv.parse(fs.readFileSync(".env.local"));
+for (const k in envConfig) {
+  process.env[k] = envConfig[k];
+}
 
-export default dotenv.config().parsed as unknown as Config;
+export default process.env as unknown as Config;
