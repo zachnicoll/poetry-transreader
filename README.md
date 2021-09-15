@@ -1,6 +1,9 @@
 # Quickstart
 
 ```sh
+# The server interfaces with GCP, and requires the GOOGLE_APPLICATION_CREDENTIALS env var to be set
+gcloud auth application-default login
+
 yarn install
 
 yarn dev
