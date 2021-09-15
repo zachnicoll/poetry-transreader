@@ -9,7 +9,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { Container, InnerContainer } from 'Styles/containers';
-import * as styles from './styles';
+import * as styles from 'Styles/pageStyles/Home.styles';
 
 interface HomeProps {
   randomPoems: PoemResponse[];
