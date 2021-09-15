@@ -3,7 +3,6 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import routes from "./routes";
-import config from "./utils/config";
 
 const app = express();
 const logger = morgan("combined");
@@ -20,7 +19,7 @@ app.use(logger);
 
 app.use(routes);
 
-const PORT = config.PORT || 5000;
+const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
 });

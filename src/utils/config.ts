@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import fs from "fs";
 
 interface Config {
-  PORT: string;
   GOOGLE_APPLICATION_CREDENTIALS: string;
   PROJECT_ID: string;
 }
