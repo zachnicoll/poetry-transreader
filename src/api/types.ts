@@ -6,13 +6,13 @@ export interface PoemResponse {
 }
 
 export enum SearchType {
-  TITLE = "title",
-  AUTHOR = "author"
+  TITLE = 'title',
+  AUTHOR = 'author'
 }
 
 export type TranslateResponse = string;
 
-export interface LanguageResult {
+export interface LanguageResponse {
   code: string;
   name: string;
 }

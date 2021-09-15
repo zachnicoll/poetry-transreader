@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import colours from "Styles/colours";
-import { ButtonContainer } from "Styles/containers";
+import styled from '@emotion/styled';
+import colours from 'Styles/colours';
+import { ButtonContainer } from 'Styles/containers';
 
 export const ScrollBox = styled.div`
   position: relative;

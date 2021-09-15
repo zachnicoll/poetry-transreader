@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { PoemResponse } from "API/types";
-import { Row } from "Styles/containers";
-import { Refresh, Translate, VolumeUpOutlined } from "@material-ui/icons";
-import useTextToSpeech from "Hooks/useTextToSpeech";
-import * as styles from "./styles";
-import Card from "../Card";
+import React, { useEffect } from 'react';
+import { PoemResponse } from 'API/types';
+import { Row } from 'Styles/containers';
+import { Refresh, Translate, VolumeUpOutlined } from '@material-ui/icons';
+import useTextToSpeech from 'Hooks/useTextToSpeech';
+import * as styles from './styles';
+import Card from '../Card';
 
 interface PoemCardProps {
   poem: PoemResponse;
@@ -32,7 +32,7 @@ const PoemCard: React.FC<PoemCardProps> = ({
   }, [audioBuffer]);
 
   const handleTextToSpeech = async (): Promise<void> => {
-    const poemLines = poem.lines.join("\n");
+    const poemLines = poem.lines.join('\n');
     await convertToAudio(poemLines);
   };
 
@@ -62,8 +62,8 @@ const PoemCard: React.FC<PoemCardProps> = ({
 
       <styles.Line />
       <styles.ScrollBox>
-        {poem.lines.map((line) => (
-          <p key={line}>{line}</p>
+        {poem.lines.map((line, i) => (
+          <p key={i}>{line}</p>
         ))}
       </styles.ScrollBox>
       <styles.Fade />

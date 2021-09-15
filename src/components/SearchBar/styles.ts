@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import breakpoints from "Styles/breakpoints";
-import colours from "Styles/colours";
-import { ButtonContainer } from "Styles/containers";
+import styled from '@emotion/styled';
+import breakpoints from 'Styles/breakpoints';
+import colours from 'Styles/colours';
+import { ButtonContainer } from 'Styles/containers';
 
 export const Container = styled.div`
   width: 100%;
@@ -44,7 +44,7 @@ interface ButtonProps {
 }
 
 export const Button = styled.button<ButtonProps>`
-  background: ${({ selected }) => (selected ? colours.darkBlue : "none")};
+  background: ${({ selected }) => (selected ? colours.darkBlue : 'none')};
   color: ${({ selected }) => (selected ? colours.paper : colours.darkBlue)};
   border: none;
   display: flex;

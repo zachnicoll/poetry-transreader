@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import breakpoints from "Styles/breakpoints";
-import colours from "../../styles/colours";
+import styled from '@emotion/styled';
+import breakpoints from 'Styles/breakpoints';
+import colours from '../../styles/colours';
 
 interface CardProps {
   width: number;
@@ -12,7 +12,7 @@ const Card = styled.div<CardProps>`
   flex-direction: column;
 
   width: ${({ width }) => width}%;
-  ${breakpoints.mobile("width: 100%;")}
+  ${breakpoints.mobile('width: 100%;')}
 
   background-color: ${colours.paper};
   padding: 0.5em 1em;

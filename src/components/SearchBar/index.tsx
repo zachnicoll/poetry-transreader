@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
-import { SearchType } from "API/types";
-import { KeyboardReturn } from "@material-ui/icons";
-import * as styles from "./styles";
+import React, { useCallback, useState } from 'react';
+import { SearchType } from 'API/types';
+import { KeyboardReturn } from '@material-ui/icons';
+import * as styles from './styles';
 
 interface SearchBarProps {
   onSearch: (type: SearchType, searchTerm: string) => void;
@@ -9,7 +9,7 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [selected, setSelected] = useState<SearchType>(SearchType.TITLE);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleClick = (clicked: SearchType): void => {
     setSelected(clicked);
@@ -20,7 +20,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   }, [searchTerm, selected, onSearch]);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleSubmit();
     }
   };

@@ -1,23 +1,24 @@
-import { API } from "API";
-import { PoemResponse, SearchType } from "API/types";
-import PoemCard from "Components/PoemCard";
-import SearchBar from "Components/SearchBar";
-import TranslateModal from "Components/TranslateModal";
-import usePlayAudio from "Hooks/usePlayAudio";
-import usePoems from "Hooks/usePoems";
-import type { NextPage } from "next";
-import Head from "next/head";
-import React, { useState } from "react";
-import { Container, InnerContainer } from "Styles/containers";
-import * as styles from "./styles";
+import { API } from 'API';
+import { LanguageResponse, PoemResponse, SearchType } from 'API/types';
+import PoemCard from 'Components/PoemCard';
+import SearchBar from 'Components/SearchBar';
+import TranslateModal from 'Components/TranslateModal';
+import usePlayAudio from 'Hooks/usePlayAudio';
+import usePoems from 'Hooks/usePoems';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import React, { useState } from 'react';
+import { Container, InnerContainer } from 'Styles/containers';
+import * as styles from './styles';
 
 interface HomeProps {
   randomPoems: PoemResponse[];
+  languages: LanguageResponse[];
 }
 
-const Home: NextPage<HomeProps> = ({ randomPoems }) => {
+const Home: NextPage<HomeProps> = ({ randomPoems, languages }) => {
   const [type, setType] = useState<SearchType>(SearchType.TITLE);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [translatePoem, setTranslatePoem] = useState<PoemResponse | null>(null);
 
   const { poems, loading } = usePoems(type, searchTerm);
@@ -26,6 +27,10 @@ const Home: NextPage<HomeProps> = ({ randomPoems }) => {
   const handleSearch = (_type: SearchType, _searchTerm: string): void => {
     setType(_type);
     setSearchTerm(_searchTerm);
+  };
+
+  const handleClose = (): void => {
+    setTranslatePoem(null);
   };
 
   return (
@@ -60,15 +65,24 @@ const Home: NextPage<HomeProps> = ({ randomPoems }) => {
       )}
 
       {translatePoem && (
-        <TranslateModal isOpen={translatePoem !== null} poem={translatePoem} />
+        <TranslateModal
+          isOpen={translatePoem !== null}
+          onClose={handleClose}
+          poem={translatePoem}
+          languages={languages}
+          onPlay={playAudio}
+        />
       )}
     </Container>
   );
 };
 
 Home.getInitialProps = async () => {
-  const randomPoems = await API.poems.random(20);
-  return { randomPoems };
+  const [randomPoems, languages] = await Promise.all([
+    API.poems.random(20),
+    API.google.supportedLanguages()
+  ]);
+  return { randomPoems, languages };
 };
 
 export default Home;

@@ -1,8 +1,8 @@
-import { axiosInstance } from "./apiConfig";
-import { LanguageResult, TranslateResponse } from "./types";
+import { axiosInstance } from './apiConfig';
+import { LanguageResponse, TranslateResponse } from './types';
 
-const TRANSLATE_ENDPOINT = "/translate";
-const SPEAK_ENDPOINT = "/speak";
+const TRANSLATE_ENDPOINT = '/translate';
+const SPEAK_ENDPOINT = '/speak';
 
 export const translate = async (
   text: string,
@@ -12,15 +12,15 @@ export const translate = async (
     `${TRANSLATE_ENDPOINT}/`,
     {
       text,
-      targetLang,
+      targetLang
     }
   );
 
   return translatedText.data;
 };
 
-export const supportedLanguages = async (): Promise<LanguageResult[]> => {
-  const languages = await axiosInstance.get<LanguageResult[]>(
+export const supportedLanguages = async (): Promise<LanguageResponse[]> => {
+  const languages = await axiosInstance.get<LanguageResponse[]>(
     `${TRANSLATE_ENDPOINT}/`
   );
   return languages.data;
@@ -30,10 +30,14 @@ export const textToSpeech = async (
   text: string,
   languageCode: string
 ): Promise<ArrayBuffer> => {
-  const audio = await axiosInstance.post<ArrayBuffer>(`${SPEAK_ENDPOINT}/`, {
-    text,
-    languageCode,
-  }, {responseType: 'arraybuffer'});
+  const audio = await axiosInstance.post<ArrayBuffer>(
+    `${SPEAK_ENDPOINT}/`,
+    {
+      text,
+      languageCode
+    },
+    { responseType: 'arraybuffer' }
+  );
 
   return audio.data;
 };
