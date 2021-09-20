@@ -6,6 +6,11 @@ export interface PoemResponse {
   linecount: number;
 }
 
+export interface PoemError {
+  status: number;
+  reason: string;
+}
+
 export type Request<T> = ExpressRequest<unknown, unknown, T>;
 
 export interface TranslateBody {
