@@ -9,20 +9,37 @@ const client = new TextToSpeech.TextToSpeechClient({
   projectId: config.PROJECT_ID,
 });
 
-let voiceList: VoiceList | null = null;
+let voiceListCache: VoiceList | null = null;
+
+const fetchAndFlattenVoiceList = async (): Promise<VoiceList | null> => {
+  if (!voiceListCache) {
+    // Get all available voices if we haven't already
+    const [voices] = await client.listVoices();
+
+    // Convert the nested array structure to a flat array of language codes,
+    // and remove any null/undefined values
+    voiceListCache =
+      (voices.voices
+        ?.map((voice) => voice.languageCodes)
+        .flatMap((lang) => lang)
+        .filter((lang) => !!lang) as VoiceList) ?? null;
+  }
+
+  return voiceListCache;
+};
 
 router.post(
   `${API_ENDPOINT}/`,
   async (request: Request<SpeakBody>, response) => {
     try {
-      if (!voiceList) {
-        const [voices] = await client.listVoices();
-        voiceList =
-          (voices.voices
-            ?.map((voice) => voice.languageCodes)
-            .flatMap((lang) => lang)
-            .filter((lang) => !!lang) as VoiceList) ?? null;
-      }
+      // Validate input here because the errors that GCP API returns are not nice to look at
+      if (!request.body.languageCode)
+        throw new Error("Body 'langaugeCode' property not supplied");
+
+      if (!request.body.text)
+        throw new Error("Body 'text' property not supplied");
+
+      const voiceList = await fetchAndFlattenVoiceList();
 
       // Quick and dirty way of figuring out what language code should be used in text-to-speech,
       // just by using a language code in a different format from the Translate API

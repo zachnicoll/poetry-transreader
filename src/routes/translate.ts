@@ -24,7 +24,7 @@ router.get(`${API_ENDPOINT}/`, async (request, response) => {
       response.json(languages);
     } catch (error) {
       response.status(500);
-      response.json({ error: error.message });
+      response.json({ error: (error as Error).message });
     }
   }
 });
@@ -40,7 +40,7 @@ router.post(
       response.json(translation);
     } catch (error) {
       response.status(500);
-      response.json({ error: error.message });
+      response.json({ error: (error as Error).message });
     }
   }
 );
