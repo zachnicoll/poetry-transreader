@@ -13,6 +13,11 @@ const translate = new Translate({ projectId: config.PROJECT_ID });
 // Use this local variable as a 'cache' so we don't spam the API for the same information
 let supportedLanguages: LanguageResult[] | null = null;
 
+/**
+ * @method GET
+ * @description Fetches all the supported languages by the Google Translate API
+ * @returns LanguageResult[] or 500 if something goes wrong
+ */
 router.get(`${API_ENDPOINT}/`, async (request, response) => {
   // Use 'cache' if this request has been made before
   if (supportedLanguages) {
@@ -29,6 +34,15 @@ router.get(`${API_ENDPOINT}/`, async (request, response) => {
   }
 });
 
+/**
+ * @method POST
+ *
+ * @param text The text to be translated
+ * @param targetLang The language to translate the text to
+ *
+ * @description Translate a given text string into another language, based on the supplied targetLang
+ * @returns String (translated text) or 500 if something goes wrong
+ */
 router.post(
   `${API_ENDPOINT}/`,
   async (request: Request<TranslateBody>, response) => {

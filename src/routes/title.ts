@@ -8,6 +8,11 @@ const API_ENDPOINT = "/title";
 const POEM_ENDPOINT = "/title";
 const router = express.Router({ strict: true });
 
+/**
+ * @method GET
+ * @description Fetches all poems with a title that contains `searchTerm` from Poetry DB
+ * @returns PoemResponse[] or 404 if no poems are found
+ */
 router.get(`${API_ENDPOINT}/:searchTerm/`, async (request, response) => {
   try {
     const poemsByTitle = await axiosInstance.get<PoemResponse[] | PoemError>(

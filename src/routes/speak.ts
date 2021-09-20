@@ -9,8 +9,15 @@ const client = new TextToSpeech.TextToSpeechClient({
   projectId: config.PROJECT_ID,
 });
 
+// Quick 'caching' solution so the voice list from GCP is fetched once per server run
 let voiceListCache: VoiceList | null = null;
 
+/**
+ * Retrieves all the available voice language codes from Google Text-to-Speech API and
+ * stores them in the voiceListCache variable. Uses voiceListCache instead if voices have
+ * been stored previously.
+ * @returns List of supported voice langauge codes for use with Googe Text-to-Speech
+ */
 const fetchAndFlattenVoiceList = async (): Promise<VoiceList | null> => {
   if (!voiceListCache) {
     // Get all available voices if we haven't already
@@ -28,6 +35,15 @@ const fetchAndFlattenVoiceList = async (): Promise<VoiceList | null> => {
   return voiceListCache;
 };
 
+/**
+ * @method POST
+ *
+ * @param text The text to synthesize to audio
+ * @param languageCode The language code to be used to synthesize the audio, necessary for languages other than English
+ *
+ * @description Takes a given string of text and converts it to a byte array before being sent back to the client
+ * @returns Byte array in the format of audio/wav, or 500 error response if something goes wrong
+ */
 router.post(
   `${API_ENDPOINT}/`,
   async (request: Request<SpeakBody>, response) => {

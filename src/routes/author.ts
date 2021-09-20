@@ -8,6 +8,11 @@ const API_ENDPOINT = "/author";
 const POEM_ENDPOINT = "/author";
 const router = express.Router({ strict: true });
 
+/**
+ * @method GET
+ * @description Fetches all poems with an author that contains `searchTerm` from Poetry DB
+ * @returns PoemResponse[] or 404 if no poems are found
+ */
 router.get(`${API_ENDPOINT}/:searchTerm/`, async (request, response) => {
   try {
     const poemsByAuthor = await axiosInstance.get<PoemResponse[] | PoemError>(
