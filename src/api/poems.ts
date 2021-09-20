@@ -1,9 +1,9 @@
-import { axiosInstance } from "./apiConfig";
-import { PoemResponse, SearchType } from "./types";
+import { axiosInstance } from './apiConfig';
+import { PoemResponse, SearchType } from './types';
 
-const TITLE_ENDPOINT = "/title";
-const AUTHOR_ENDPOINT = "/author";
-const RANDOM_ENDPOINT = "/random";
+const TITLE_ENDPOINT = '/title';
+const AUTHOR_ENDPOINT = '/author';
+const RANDOM_ENDPOINT = '/random';
 
 const searchByTitle = async (searchTerm: string): Promise<PoemResponse[]> => {
   const poems = await axiosInstance.get<PoemResponse[]>(
@@ -22,11 +22,8 @@ const searchByAuthor = async (searchTerm: string): Promise<PoemResponse[]> => {
 export const searchBy = async (
   type: SearchType,
   searchTerm: string
-): Promise<PoemResponse[]> => {
-  return type === "title"
-    ? await searchByTitle(searchTerm)
-    : await searchByAuthor(searchTerm);
-};
+): Promise<PoemResponse[]> =>
+  type === 'title' ? searchByTitle(searchTerm) : searchByAuthor(searchTerm);
 
 export const random = async (
   numberOfPoems: number

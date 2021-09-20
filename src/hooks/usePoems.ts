@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { API } from "../api";
-import { PoemResponse, SearchType } from "../api/types";
+import { useCallback, useEffect, useState } from 'react';
+import { API } from '../api';
+import { PoemResponse, SearchType } from '../api/types';
 
 interface HookReturn {
   loading: boolean;
@@ -20,7 +20,7 @@ const usePoems = (type: SearchType, searchTerm: string): HookReturn => {
         setPoems(poemResults);
       } catch (e) {
         console.error(e);
-        alert("Could not find any poems matching that search term.");
+        alert('Could not find any poems matching that search term.');
       }
 
       setLoading(false);

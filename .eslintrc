@@ -53,6 +53,7 @@
     "react-hooks/exhaustive-deps": "off",
     "react/jsx-props-no-spreading": "off",
     "quotes": "error",
-    "react/no-array-index-key": "warn"
+    "react/no-array-index-key": "warn",
+    "import/prefer-default-export": "warn"
   }
 }

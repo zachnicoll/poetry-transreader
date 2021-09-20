@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 interface HookReturn {
   playAudio: (audioBuffer: ArrayBuffer) => void;
@@ -33,7 +33,7 @@ const usePlayAudio = (): HookReturn => {
         const newSrc = audioCtx.createBufferSource();
         newSrc.buffer = decodedBuffer;
         newSrc.connect(audioCtx.destination);
-        newSrc.addEventListener("ended", () => setIsPlaying(false));
+        newSrc.addEventListener('ended', () => setIsPlaying(false));
 
         // Play the audio
         audioSource.current = newSrc;
