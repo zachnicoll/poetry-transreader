@@ -8,10 +8,13 @@ Serverside implementation uses a mashup of APIs:
 - Google Cloud Text-to-Speech, for reading the poems aloud
 
 ## Preview
+View and search poems by title and author. Then, read them aloud!
 
-![Main page of the application](content/screenshot1.png)
+<img src="content/screenshot1.png" width="700">
 
-![Translation screen](content/screenshot2.png)
+Or, translate a poem before listening to it.
+
+<img src="content/screenshot2.png" width="700">
 
 ## Running Locally
 
