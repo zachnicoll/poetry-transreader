@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:14-alpine
 
 # create & set working directory
 RUN mkdir -p /usr/src

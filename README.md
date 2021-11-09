@@ -7,6 +7,12 @@ Serverside implementation uses a mashup of APIs:
 - Google Cloud Translate, for translating poems
 - Google Cloud Text-to-Speech, for reading the poems aloud
 
+## Preview
+
+![Main page of the application](content/screenshot1.png)
+
+![Translation screen](content/screenshot2.png)
+
 ## Running Locally
 
 If you have not setup a GCP project and authenticated your machine with `gcloud` util, please follow the steps outlined in the _Deployment_ section.
@@ -31,6 +37,8 @@ Run the client and server:
 docker-compose build
 docker-compose up
 ```
+
+Go to http://localhost:3000/ - ta-da!
 
 ## Deploying
 

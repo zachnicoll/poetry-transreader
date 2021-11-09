@@ -78,11 +78,16 @@ const Home: NextPage<HomeProps> = ({ randomPoems, languages }) => {
 };
 
 Home.getInitialProps = async () => {
-  const [randomPoems, languages] = await Promise.all([
-    API.poems.random(20),
-    API.google.supportedLanguages()
-  ]);
-  return { randomPoems, languages };
+  try {
+    const [randomPoems, languages] = await Promise.all([
+      API.poems.random(20),
+      API.google.supportedLanguages()
+    ]);
+    return { randomPoems, languages };
+  } catch (e) {
+    console.error('Failed to fetch initial props!', e);
+    return { randomPoems: [], languages: [] };
+  }
 };
 
 export default Home;
