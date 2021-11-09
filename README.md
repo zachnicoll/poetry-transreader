@@ -1,23 +1,44 @@
-# Quickstart
+# Poetry Transreader
 
-```sh
-# The server interfaces with GCP, and requires the GOOGLE_APPLICATION_CREDENTIALS env var to be set
-gcloud auth application-default login
+Poetry reader... and translator! Monorepo containing client (NextJs) and server (ExpressJs) applications.
 
-yarn install
+Serverside implementation uses a mashup of APIs:
+- https://poetrydb.org, for retrieving poem data
+- Google Cloud Translate, for translating poems
+- Google Cloud Text-to-Speech, for reading the poems aloud
 
-yarn dev
+## Running Locally
+
+If you have not setup a GCP project and authenticated your machine with `gcloud` util, please follow the steps outlined in the _Deployment_ section.
+
+Create an `.env.local` file inside the `client/` folder, and add `API_BASE_URL` as a variable like so:
+
+```.env
+# Insert your machine's IP here, with port 5000
+API_BASE_URL=http://192.168.0.0:5000
 ```
 
-### Production
+Create an `.env.local` file inside the `server/` folder, and add `PROJECT_ID` as a variable like so:
 
-Use `yarn start` to run this server in 'production' (non-dev mode).
+```.env
+# Change to your GCP Project ID
+PROJECT_ID=poem-trans-reader
+```
 
-# Deploying
+Run the client and server:
+
+```sh
+docker-compose build
+docker-compose up
+```
+
+## Deploying
 
 The client and server for this application have been deployed to an AWS EC2 instance. Follow these instructions to achieve the same result.
 
-## Prerequisites
+### Prerequisites
+
+This application uses Google Cloud Platform's Text-to-Speech and Translate APIs - make sure you have created a GCP project with these APIs enabled.
 
 _SSH into your EC2 instance to perform the following commands._
 
@@ -34,6 +55,7 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 
 gcloud init
 
+# Sign-in with the Google account that houses your GCP project
 gcloud auth application-default login
 ```
 
@@ -43,11 +65,13 @@ Install `docker`:
 sudo apt install docker.io
 ```
 
-## Running the Images
+### Running the Images
 
 Pull the docker images for the client and server, and run them!
 
 ```sh
+sudo docker login
+
 sudo docker pull znicoll/transreader-server:latest
 
 sudo docker pull znicoll/transreader-client:latest
